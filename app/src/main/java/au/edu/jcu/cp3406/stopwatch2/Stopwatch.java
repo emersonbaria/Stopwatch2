@@ -1,12 +1,12 @@
 package au.edu.jcu.cp3406.stopwatch2;
 
-public class Stopwatch {
-    int seconds,hours,minutes,secs;
+import java.util.logging.Handler;
 
-    String time;
+public class Stopwatch {
+    private int seconds,hours,minutes,secs;
+    private String time;
 
     public Stopwatch() {
-
     }
 
     public void tick() {

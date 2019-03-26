@@ -16,7 +16,7 @@ public class StopwatchActivity extends AppCompatActivity {
     TextView display;
     Button toggle;
     Stopwatch stopwatch;
-    int speed =1000;
+    int speed=1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +25,10 @@ public class StopwatchActivity extends AppCompatActivity {
 
         display = findViewById(R.id.time_view);
         toggle = findViewById(R.id.toggle);
-
+        stopwatch=new Stopwatch();
         isRunning=false;
+        enableStopwatch();
+
         if (savedInstanceState == null) {
             stopwatch = new Stopwatch();
         } else {
@@ -48,7 +50,6 @@ public class StopwatchActivity extends AppCompatActivity {
     }
 
     public void enableStopwatch() {
-        isRunning = true;
         handler = new Handler();
         handler.post(new Runnable() {
             @Override
@@ -66,7 +67,7 @@ public class StopwatchActivity extends AppCompatActivity {
     public void disableStopwatch() {
         isRunning=false;
         stopwatch.reset();
-        display.setText("00:00:00");
+        display.setText(getString(R.string.defaultDisplay));
 
     }
 
@@ -75,8 +76,9 @@ public class StopwatchActivity extends AppCompatActivity {
         String btnLabel=toggle.getText().toString();
         if (btnLabel.equals("Start")) {
             toggle.setText("Stop");
-            enableStopwatch();
+            isRunning=true;
         } else if (btnLabel.equals("Stop")) {
+            isRunning=false;
             toggle.setText("Start");
             disableStopwatch();
         }
@@ -84,7 +86,7 @@ public class StopwatchActivity extends AppCompatActivity {
 
     public void settingsClicked(View view) {
         Intent intent = new Intent(this, SettingsActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent,1);
     }
 
     @Override

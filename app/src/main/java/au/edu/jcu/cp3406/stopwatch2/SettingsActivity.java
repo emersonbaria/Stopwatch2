@@ -18,11 +18,9 @@ public class SettingsActivity extends AppCompatActivity {
     public void doneClicked(View view) {
         EditText input = findViewById(R.id.timerSpeedInput);
         String speed = input.getText().toString();
-
-        Intent intent = new Intent(
-
-        );
-        intent.putExtra("speed", speed);
+        int intSpeed = Integer.parseInt(speed);
+        Intent intent = new Intent();
+        intent.putExtra("speed", intSpeed);
         setResult(RESULT_OK, intent);
         finish();
     }
